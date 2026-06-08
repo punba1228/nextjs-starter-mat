@@ -1,0 +1,42 @@
+{
+  "name": "Next.js Node24 Devcontainer",
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
+  "service": "node",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "pnpm install",
+  "postStartCommand": "pnpm dev",
+  "remoteUser": "root",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // "remote.SSH.configFile": "/root/.ssh/config",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit",
+          "source.fixAll.stylelint": "explicit"
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
+        "editor.formatOnType": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "[markdown]": {
+          "editor.formatOnSave": false
+        }
+      },
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "EditorConfig.EditorConfig",
+        "dbaeumer.vscode-eslint",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "oderwat.indent-rainbow",
+        "PKief.material-icon-theme",
+        "prisma.prisma",
+        "Anthropic.claude-code"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  }
+}
