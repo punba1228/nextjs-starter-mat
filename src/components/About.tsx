@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const skills = [
   { label: "Recording", value: 95 },
   { label: "Mixing", value: 90 },
@@ -27,25 +29,15 @@ export default function About() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Photo placeholder */}
-          <div className="relative">
-            <div className="aspect-[3/4] bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center max-w-sm mx-auto lg:mx-0">
-              <div className="text-center text-[var(--muted)]">
-                <svg
-                  className="w-16 h-16 mx-auto mb-4 opacity-30"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-                <p className="text-xs tracking-widest">PHOTO</p>
-              </div>
+          {/* Profile photo */}
+          <div className="relative max-w-sm mx-auto lg:mx-0">
+            <div className="aspect-[3/4] relative overflow-hidden border border-[var(--border)]">
+              <Image
+                src="/hidenori-watabe.jpg"
+                alt="渡部 秀典"
+                fill
+                className="object-cover"
+              />
             </div>
             {/* Decorative gold corner */}
             <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-[var(--gold)] hidden lg:block" />

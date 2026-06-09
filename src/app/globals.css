@@ -3,12 +3,12 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --gold: #C9A84C;
+  --gold: #c9a84c;
   --gold-light: #e0c870;
   --gold-dim: rgba(201, 168, 76, 0.15);
   --surface: #111111;
   --surface-2: #1a1a1a;
-  --muted: #6b6b6b;
+  --muted: #a8a8a8;
   --border: rgba(201, 168, 76, 0.2);
 }
 
@@ -43,7 +43,7 @@ body {
 
 /* Gold gradient text utility */
 .gold-text {
-  background: linear-gradient(135deg, #C9A84C 0%, #e0c870 50%, #C9A84C 100%);
+  background: linear-gradient(135deg, #c9a84c 0%, #e0c870 50%, #c9a84c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -53,7 +53,7 @@ body {
 .section-divider {
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, #C9A84C, transparent);
+  background: linear-gradient(90deg, #c9a84c, transparent);
   margin-bottom: 1rem;
 }
 
@@ -73,11 +73,21 @@ body {
   animation: fadeInUp 0.7s ease-out forwards;
 }
 
-.animate-delay-100 { animation-delay: 0.1s; }
-.animate-delay-200 { animation-delay: 0.2s; }
-.animate-delay-300 { animation-delay: 0.3s; }
-.animate-delay-400 { animation-delay: 0.4s; }
-.animate-delay-500 { animation-delay: 0.5s; }
+.animate-delay-100 {
+  animation-delay: 0.1s;
+}
+.animate-delay-200 {
+  animation-delay: 0.2s;
+}
+.animate-delay-300 {
+  animation-delay: 0.3s;
+}
+.animate-delay-400 {
+  animation-delay: 0.4s;
+}
+.animate-delay-500 {
+  animation-delay: 0.5s;
+}
 
 /* Subtle grid background */
 .grid-bg {

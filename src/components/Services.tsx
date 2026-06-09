@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type Plan = {
   name: string;
   price: string;
@@ -8,6 +10,7 @@ type Plan = {
 
 type Service = {
   id: string;
+  icon: string;
   title: string;
   titleJa: string;
   description: string;
@@ -17,6 +20,7 @@ type Service = {
 const services: Service[] = [
   {
     id: "recording",
+    icon: "/recording.svg",
     title: "Recording",
     titleJa: "レコーディング",
     description:
@@ -56,6 +60,7 @@ const services: Service[] = [
   },
   {
     id: "mixing",
+    icon: "/mix.svg",
     title: "Mixing",
     titleJa: "ミキシング",
     description:
@@ -84,6 +89,7 @@ const services: Service[] = [
   },
   {
     id: "mastering",
+    icon: "/mastering.svg",
     title: "Mastering",
     titleJa: "マスタリング",
     description:
@@ -112,6 +118,7 @@ const services: Service[] = [
   },
   {
     id: "live-pa",
+    icon: "/pa.svg",
     title: "Live PA",
     titleJa: "ライブPA",
     description:
@@ -140,6 +147,7 @@ const services: Service[] = [
   },
   {
     id: "arrangement",
+    icon: "/compose.svg",
     title: "Composition / Arrangement",
     titleJa: "作曲・編曲",
     description:
@@ -172,7 +180,10 @@ function ServiceCard({ service }: { service: Service }) {
   return (
     <div className="border border-[var(--border)] bg-[var(--surface)] p-8">
       <div className="mb-8">
-        <p className="text-xs tracking-[0.3em] text-[var(--gold)] uppercase mb-1">{service.title}</p>
+        <div className="flex items-center gap-3 mb-1">
+          <Image src={service.icon} alt={service.titleJa} width={28} height={28} />
+          <p className="text-xs tracking-[0.3em] text-[var(--gold)] uppercase">{service.title}</p>
+        </div>
         <h3 className="text-2xl font-light text-white mb-4">{service.titleJa}</h3>
         <p className="text-sm text-[var(--muted)] leading-relaxed">{service.description}</p>
       </div>
