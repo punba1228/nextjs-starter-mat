@@ -1,9 +1,32 @@
 "use server";
 
+import { headers } from "next/headers";
 import { Resend } from "resend";
 import { env } from "@/lib/zod/env";
 
 const resend = new Resend(env.RESEND_API_KEY);
+
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitStore.get(ip);
+
+  if (!entry || now > entry.resetAt) {
+    rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+
+  if (entry.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+
+  entry.count += 1;
+  return true;
+}
 
 export type ContactFormData = {
   name: string;
@@ -18,6 +41,13 @@ export type ContactResult =
   | { success: false; error: string };
 
 export async function sendContactEmail(data: ContactFormData): Promise<ContactResult> {
+  const headersList = await headers();
+  const ip = headersList.get("x-forwarded-for")?.split(",")[0].trim() ?? headersList.get("x-real-ip") ?? "unknown";
+
+  if (!checkRateLimit(ip)) {
+    return { success: false, error: "送信回数の上限に達しました。1時間後に再度お試しください。" };
+  }
+
   const { error } = await resend.emails.send({
     from: "お問い合わせフォーム <onboarding@resend.dev>",
     to: env.CONTACT_TO_EMAIL,
