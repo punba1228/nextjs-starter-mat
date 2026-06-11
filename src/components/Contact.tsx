@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { sendContactEmail } from "@/app/actions/contact";
 
 type FormState = {
   name: string;
@@ -39,6 +40,8 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -46,10 +49,19 @@ export default function Contact() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: integrate with email API (e.g. Resend, SendGrid)
-    setSubmitted(true);
+    setLoading(true);
+    setErrorMsg(null);
+
+    const result = await sendContactEmail(form);
+
+    setLoading(false);
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      setErrorMsg(result.error);
+    }
   };
 
   return (
