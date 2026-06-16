@@ -104,8 +104,9 @@ export default function Contact() {
                   value={form.name}
                   onChange={handleChange}
                   required
+                  disabled={loading}
                   placeholder="山田 太郎"
-                  className={inputClass}
+                  className={`${inputClass} disabled:opacity-40 disabled:cursor-not-allowed`}
                 />
               </div>
               <div>
@@ -118,8 +119,9 @@ export default function Contact() {
                   value={form.email}
                   onChange={handleChange}
                   required
+                  disabled={loading}
                   placeholder="example@mail.com"
-                  className={inputClass}
+                  className={`${inputClass} disabled:opacity-40 disabled:cursor-not-allowed`}
                 />
               </div>
             </div>
@@ -134,7 +136,8 @@ export default function Contact() {
                   value={form.service}
                   onChange={handleChange}
                   required
-                  className={`${inputClass} appearance-none cursor-pointer`}
+                  disabled={loading}
+                  className={`${inputClass} appearance-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed`}
                 >
                   <option value="" disabled>
                     選択してください
@@ -154,7 +157,8 @@ export default function Contact() {
                   name="budget"
                   value={form.budget}
                   onChange={handleChange}
-                  className={`${inputClass} appearance-none cursor-pointer`}
+                  disabled={loading}
+                  className={`${inputClass} appearance-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed`}
                 >
                   <option value="">未定 / わからない</option>
                   {budgetOptions.map((opt) => (
@@ -175,18 +179,42 @@ export default function Contact() {
                 value={form.message}
                 onChange={handleChange}
                 required
+                disabled={loading}
                 rows={6}
                 placeholder="楽曲の概要、スケジュール、ご要望などをお気軽にご記載ください。"
-                className={`${inputClass} resize-none`}
+                className={`${inputClass} resize-none disabled:opacity-40 disabled:cursor-not-allowed`}
               />
             </div>
 
             <div className="text-center pt-2">
               <button
                 type="submit"
-                className="px-12 py-4 bg-[var(--gold)] text-black text-sm tracking-widest font-semibold hover:bg-[var(--gold-light)] transition-colors duration-200 disabled:opacity-50"
+                disabled={loading}
+                className="px-12 py-4 bg-[var(--gold)] text-black text-sm tracking-widest font-semibold hover:bg-[var(--gold-light)] transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed min-w-[180px]"
               >
-                送信する
+                {loading ? (
+                  <span className="flex items-center justify-center gap-3">
+                    <svg
+                      className="animate-mail-fly"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect x="2" y="4" width="20" height="16" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                    <span>
+                      送信中<span className="animate-dots" />
+                    </span>
+                  </span>
+                ) : (
+                  "送信する"
+                )}
               </button>
             </div>
           </form>
